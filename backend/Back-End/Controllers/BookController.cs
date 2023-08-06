@@ -20,10 +20,10 @@ namespace Back_End.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<string>> GetBook()
+        [HttpGet("{book}")]
+        public async Task<ActionResult<string>> GetBook(string book)
         {
-            return await _service.SearchBooks();
-        }        
+            return await _service.SearchBooks(book);
+        }
     }
 }

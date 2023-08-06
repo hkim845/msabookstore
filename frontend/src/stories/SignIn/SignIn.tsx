@@ -50,10 +50,8 @@ export default function SignIn() {
 
   useEffect(() => {
     if (token) {
-      console.log("token saved");
       localStorage.setItem("token", token);
     } else {
-      console.log("token removed");
       localStorage.removeItem("token");
     }
   }, [token]);
@@ -72,6 +70,8 @@ export default function SignIn() {
         console.log(payload.token);
         try {
           setToken(payload.token);
+          console.log(1111);
+          navigate("/");
         } catch (e) {
           console.error(e);
         }

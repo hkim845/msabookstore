@@ -16,10 +16,11 @@ namespace Back_End.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<string> SearchBooks()
+        public async Task<string> SearchBooks(string book)
         {
             string apiKey = "AIzaSyALdC7SfTRXJ_zV5KCsnwyiDqVoBGXwU2Q";
-            string url = $"https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key={apiKey}";
+            string[] split = book.Split('=');
+            string url = $"https://www.googleapis.com/books/v1/volumes?q={split[1]}&key={apiKey}";
 
             try
             {

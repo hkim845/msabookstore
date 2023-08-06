@@ -1,7 +1,18 @@
 .App {
   text-align: center;
+  height: 90%;
 }
 
+.input-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  height: 100vh;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

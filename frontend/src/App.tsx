@@ -5,8 +5,6 @@ import Home from "./Home";
 function App() {
   const isAuthenticated = !!localStorage.getItem("token");
 
-  console.log(isAuthenticated);
-
   return (
     <>
       {isAuthenticated && <Home></Home>}
