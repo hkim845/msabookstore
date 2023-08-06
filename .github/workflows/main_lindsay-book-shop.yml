@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    default:
+      run:
+        working-directory: "./frontend"
 
     steps:
       - uses: actions/checkout@v2
@@ -53,4 +56,4 @@ jobs:
           app-name: 'lindsay-book-shop'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_67EB6B85B43B4475A1C9426DF748203F }}
-          package: .
+          package: './frontend/build'
