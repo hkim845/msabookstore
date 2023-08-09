@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Back_End.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/")]
     [ApiController]
     public class UserController : ControllerBase
     {

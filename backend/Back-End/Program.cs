@@ -88,13 +88,11 @@ app.UseCors(policy =>
         .AllowAnyMethod();
 });
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    // Register the Swagger generator and the Swagger UI middlewares
-    app.UseOpenApi();
-    app.UseSwaggerUi3();    
-}
+
+// Register the Swagger generator and the Swagger UI middlewares
+app.UseOpenApi();
+app.UseSwaggerUi3();    
+
 
 app.UseHttpsRedirection();
 
