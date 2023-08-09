@@ -52,6 +52,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+          path: release.zip
 
       - name: unzip artifact for deployment
         run: unzip ./frontend/release.zip
@@ -63,4 +64,4 @@ jobs:
           app-name: 'lindsay-bookshop-frontend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F34A5213CE8E4C739B5FFA84FC7220BD }}
-          package: .
+          package: ./frontend/build'
