@@ -57,4 +57,4 @@ jobs:
           app-name: 'lindsay-bookshop-frontend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F34A5213CE8E4C739B5FFA84FC7220BD }}
-          package: .
+          package: "./frontend/build"
