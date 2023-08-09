@@ -35,9 +35,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<BookService>();
 
 var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-var issuer = "https://localhost:7206/";
-var audience = "http://localhost:3000/";
-var key = Encoding.ASCII.GetBytes("my-32-character-ultra-secure-and-ultra-long-secret");
+var issuer = configuration["Jwt:Issuer"];
+var audience = configuration["Jwt:Audience"];
+var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
 
 builder.Services.AddAuthentication(options =>
     {
@@ -82,7 +82,7 @@ var app = builder.Build();
 
 app.UseCors(policy =>
 {
-    policy.WithOrigins("http://localhost:3000")
+    policy.WithOrigins("http://localhost:3000", "https://lindsay-book-shop.azurewebsites.net/login")
         .AllowCredentials()
         .AllowAnyHeader()
         .AllowAnyMethod();

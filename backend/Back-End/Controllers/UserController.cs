@@ -12,15 +12,17 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Back_End.Controllers
 {
-    [Route("/")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
+        private readonly IConfiguration Configuration;
 
-        public UserController(IUserService service)
+        public UserController(IUserService service, IConfiguration configuration)
         {
             _service = service;
+            Configuration = configuration;
         }
 
         [HttpPost]
@@ -40,9 +42,9 @@ namespace Back_End.Controllers
                 return Unauthorized();
 
             var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            var issuer = "https://localhost:7206/";
-            var audience = "http://localhost:3000/";
-            var key = Encoding.ASCII.GetBytes("my-32-character-ultra-secure-and-ultra-long-secret");
+            var issuer = Configuration["Jwt:Issuer"];
+            var audience = Configuration["Jwt:Audience"];
+            var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Key"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
