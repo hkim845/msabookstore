@@ -1,13 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
 using Back_End.Models;
 using Back_End.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Back_End.Controllers
@@ -41,7 +37,6 @@ namespace Back_End.Controllers
             if (user == null)
                 return Unauthorized();
 
-            var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             var issuer = Configuration["Jwt:Issuer"];
             var audience = Configuration["Jwt:Audience"];
             var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Key"]);
