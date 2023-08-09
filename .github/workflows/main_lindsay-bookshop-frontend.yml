@@ -54,7 +54,7 @@ jobs:
           name: node-app
 
       - name: unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip -d './frontend' release.zip
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -63,4 +63,4 @@ jobs:
           app-name: 'lindsay-bookshop-frontend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F34A5213CE8E4C739B5FFA84FC7220BD }}
-          package: './frontend/build'
+          package: .
