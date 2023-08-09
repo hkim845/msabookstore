@@ -43,6 +43,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    defaults:
+      run:
+        working-directory: "./frontend"
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -54,7 +57,7 @@ jobs:
           name: node-app
 
       - name: unzip artifact for deployment
-        run: unzip ./frontend/release.zip
+        run: unzip release.zip
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -63,4 +66,4 @@ jobs:
           app-name: 'lindsay-bookshop-frontend'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F34A5213CE8E4C739B5FFA84FC7220BD }}
-          package: ./frontend/build'
+          package: './build'
