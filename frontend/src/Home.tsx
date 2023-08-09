@@ -25,7 +25,6 @@ function Home() {
   };
 
   useEffect(() => {
-    console.log(data);
     if (data != null) {
       setBooks(data);
     }

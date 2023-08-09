@@ -40,11 +40,7 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [addNewPost, response] = useLoginMutation();
-  const [token, setToken_] = useState(localStorage.getItem("token"));
-
-  const setToken = (newToken: string) => {
-    setToken_(newToken);
-  };
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const navigate = useNavigate();
 
@@ -67,17 +63,9 @@ export default function SignIn() {
     addNewPost(user)
       .unwrap()
       .then((payload) => {
-        console.log(payload.token);
-        try {
-          setToken(payload.token);
-          console.log(1111);
-          navigate("/");
-        } catch (e) {
-          console.error(e);
-        }
-      })
-      .then((error) => {
-        console.error(error);
+        setToken(payload.token);
+        localStorage.setItem("token", payload.token);
+        navigate("/");
       });
   };
 
