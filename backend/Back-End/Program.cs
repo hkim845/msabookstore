@@ -61,7 +61,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 // register the required Swagger services for NSwag
-builder.Services.AddOpenApiDocument(document => 
+builder.Services.AddOpenApiDocument(document =>
 {
     document.Title = "My Todo Api";
     document.Version = "v1";
@@ -82,7 +82,7 @@ var app = builder.Build();
 
 app.UseCors(policy =>
 {
-    policy.WithOrigins("http://localhost:3000", "https://lindsay-book-shop.azurewebsites.net/login")
+    policy.WithOrigins("http://localhost:3000", "https://lindsay-bookshop-frontend.azurewebsites.net")
         .AllowCredentials()
         .AllowAnyHeader()
         .AllowAnyMethod();
@@ -91,7 +91,7 @@ app.UseCors(policy =>
 
 // Register the Swagger generator and the Swagger UI middlewares
 app.UseOpenApi();
-app.UseSwaggerUi3();    
+app.UseSwaggerUi3();
 
 
 app.UseHttpsRedirection();
