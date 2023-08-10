@@ -11,10 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: "./frontend"
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -28,9 +25,8 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-        env:
-          CI: false
-
+          npm run test --if-present
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
@@ -51,10 +47,10 @@ jobs:
           name: node-app
 
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
         with:
           app-name: 'lindsay-bookshop-frontend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F34A5213CE8E4C739B5FFA84FC7220BD }}
-          package: "./frontend/build"
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_62780591C29D4091889D17FAE9C07A2B }}
+          package: .
