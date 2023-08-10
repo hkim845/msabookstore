@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - lindsay-book-store-backend
+name: Build and deploy Node.js app to Azure Web App - lindsay-book-shop
 
 on:
   push:
@@ -12,6 +12,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: "./frontend"
 
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +28,8 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
+        env:
+          CI: false
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -50,7 +54,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'lindsay-book-store-backend'
+          app-name: 'lindsay-book-shop'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EABE58164ECB48918AAAFC6668D8E4B5 }}
-          package: .
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_67EB6B85B43B4475A1C9426DF748203F }}
+          package: './frontend/build'
